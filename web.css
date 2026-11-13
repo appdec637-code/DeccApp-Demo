@@ -1,0 +1,146 @@
+/* Ajustes para navegador / telemóvel. Só entra na versão web (docs/). */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  min-height: 100dvh;
+  overscroll-behavior-y: contain;
+}
+/* Barra de endereço do telemóvel não deve cortar conteúdo */
+#app {
+  min-height: 100dvh;
+}
+
+/* Menu lateral passa a gaveta deslizante no telemóvel */
+.web-menu-btn {
+  display: none;
+  position: fixed;
+  right: 12px;
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  z-index: 45;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  font-size: 22px;
+  line-height: 1;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 28px #0005;
+  cursor: pointer;
+}
+body.web-mobile-nav .web-menu-btn {
+  display: flex;
+}
+body.web-mobile-nav .sidebar {
+  position: fixed !important;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 40;
+  height: 100dvh !important;
+  width: min(84vw, 300px) !important;
+  transform: translateX(-102%);
+  transition: transform .22s ease;
+  box-shadow: 0 16px 40px #0007;
+  padding-top: calc(18px + env(safe-area-inset-top)) !important;
+  overflow-y: auto !important;
+}
+body.web-mobile-nav.sidebar-open .sidebar {
+  transform: none;
+}
+body.web-mobile-nav .sidebar .nav-label,
+body.web-mobile-nav .sidebar .user-info,
+body.web-mobile-nav .sidebar .side-foot {
+  display: inline !important;
+}
+body.web-mobile-nav .sidebar .nav-btn {
+  text-align: left;
+  font-size: 14px;
+}
+body.web-mobile-nav .sidebar #sidebarToggle {
+  display: none !important;
+}
+body.web-mobile-nav.sidebar-open::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 39;
+  background: #0007;
+}
+
+@media (max-width: 767px) {
+  .content {
+    padding: 12px 12px calc(16px + env(safe-area-inset-bottom));
+  }
+  .sidebar {
+    padding-top: calc(8px + env(safe-area-inset-top));
+  }
+  .btn,
+  .nav-btn,
+  .sidebar-toggle,
+  .login-tabs button,
+  .modal-actions .btn {
+    min-height: 40px;
+  }
+  .modal {
+    align-items: flex-start;
+    padding: 8px;
+    overflow-y: auto;
+  }
+  .modal-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-height: calc(100dvh - 16px);
+    overflow: auto;
+  }
+  .table-wrap {
+    max-height: 62dvh;
+  }
+  /* iOS amplia o ecrã quando o campo tem letra pequena */
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+  .page-head h1 {
+    font-size: 18px;
+  }
+  /* filtros deixam de ter largura mínima fixa (não cabiam no telemóvel) */
+  #view-products .prod-filter {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .filter-row {
+    flex-wrap: wrap;
+  }
+  .filter-row .filter-sel,
+  #view-products .prod-filter .filter-sel {
+    width: 100%;
+    max-width: none;
+  }
+  .document-workspace {
+    grid-template-columns: 1fr !important;
+    height: auto !important;
+  }
+  .document-preview-card {
+    min-height: 60dvh;
+  }
+  .document-inspector {
+    max-height: none;
+  }
+  .sale-document-modal #infoBody,
+  .sale-document-modal .modal-card {
+    height: auto !important;
+    max-height: none !important;
+  }
+}
+
+@media print {
+  .preview-zoom {
+    display: none !important;
+  }
+}
